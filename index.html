@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>পাত্র মূল্যায়ন ক্যালকুলেটর | বাজার দর + সচেতনতা 😂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f9f3e2 0%, #ffe6c9 100%);
+      font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .comic-card {
+      max-width: 700px;
+      width: 100%;
+      margin: 1rem auto;
+      background: #fffef5;
+      border-radius: 3rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      border: 2px solid #f3c26f;
+      transition: all 0.2s;
+    }
+
+    .header {
+      background: #c2492d;
+      padding: 1.5rem 1.2rem;
+      text-align: center;
+      color: #fff9e8;
+      border-bottom: 5px solid #ffcd94;
+    }
+
+    .header h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .header p {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      opacity: 0.95;
+      font-weight: 500;
+    }
+
+    .warning-badge {
+      background: #fff0d6;
+      border-radius: 2rem;
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      margin-top: 0.6rem;
+      font-size: 0.75rem;
+      color: #b64926;
+      font-weight: bold;
+    }
+
+    .form-section {
+      padding: 1.8rem 1.8rem 1rem;
+    }
+
+    .input-group {
+      margin-bottom: 1.6rem;
+      background: #fffaf2;
+      padding: 0.8rem 1rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      transition: 0.2s;
+    }
+
+    label {
+      font-weight: 700;
+      color: #5e2e1c;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      font-family: 'Noto Sans Bengali', monospace;
+      font-size: 0.95rem;
+      border: 2px solid #f5d7b0;
+      border-radius: 1.2rem;
+      background: white;
+      transition: 0.2s;
+      outline: none;
+      font-weight: 500;
+    }
+
+    select:focus, input:focus {
+      border-color: #e2933b;
+      box-shadow: 0 0 0 3px rgba(226, 147, 59, 0.2);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .radio-group label {
+      font-weight: normal;
+      gap: 0.3rem;
+      margin-bottom: 0;
+    }
+
+    .funny-hint {
+      font-size: 0.7rem;
+      color: #b97f44;
+      margin-top: 0.3rem;
+      font-style: italic;
+    }
+
+    button {
+      background: #e98a3e;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.2rem;
+      font-weight: 800;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      border-radius: 2.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin: 0.5rem 0 1rem;
+      box-shadow: 0 5px 0 #8b3c1a;
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #8b3c1a;
+    }
+
+    .result-area {
+      background: #fff1e0;
+      margin: 0.5rem 1.5rem 1.5rem;
+      border-radius: 2rem;
+      padding: 1.2rem;
+      text-align: center;
+      border: 2px dashed #d98c2b;
+    }
+
+    .result-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #a33f1c;
+      background: #ffefdb;
+      display: inline-block;
+      padding: 0.2rem 1.2rem;
+      border-radius: 2rem;
+    }
+
+    .price-tag {
+      font-size: 2rem;
+      font-weight: 800;
+      background: #2c2c2c;
+      color: #ffde9c;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      display: inline-block;
+      margin: 0.8rem 0;
+      font-family: monospace;
+    }
+
+    .comment-box {
+      background: #fce6ce;
+      padding: 0.8rem;
+      border-radius: 1.2rem;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #7e3a1f;
+    }
+
+    .legal-roar {
+      background: #ffdada;
+      border-left: 6px solid #c0392b;
+      padding: 0.8rem;
+      font-weight: bold;
+      font-size: 0.8rem;
+      color: #b52b1a;
+      border-radius: 1rem;
+      margin-top: 1rem;
+    }
+
+    .footer-joke {
+      text-align: center;
+      font-size: 0.7rem;
+      padding: 1rem;
+      background: #f7e7d3;
+      color: #976b42;
+      border-top: 1px solid #f3dbb8;
+    }
+    @media (max-width: 550px) {
+      body { padding: 0.8rem; }
+      .header h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="comic-card">
+  <div class="header">
+    <h1>
+      🎭 পাত্র মূল্যায়ন ক্যালকুলেটর 
+      <span style="font-size:1.5rem;">🧐</span>
+    </h1>
+    <p>জমি, বাসা, প্রেম, অভ্যাস — সব মিলিয়ে সম্পূর্ণ "বাজার দর" (শুধু মজা + শিক্ষা)</p>
+    <div class="warning-badge">⚡ যৌতুক দণ্ডনীয় অপরাধ — এটা ব্যঙ্গাত্মক বিশ্লেষণ মাত্র ⚡</div>
+  </div>
+
+  <div class="form-section">
+    <!-- পেশা সিলেক্ট -->
+    <div class="input-group">
+      <label>💼 পাত্রের পেশা</label>
+      <select id="profession">
+        <option value="govt">সরকারি চাকরি (গ্রেডেড মিয়াভাই)</option>
+        <option value="private">বেসরকারি চাকরি (প্রাইভেট যোদ্ধা)</option>
+        <option value="business">ব্যবসায়ী (কালা টাকার বাদশা)</option>
+        <option value="freelancer">ফ্রিল্যান্সার (ল্যাপটপের দাস)</option>
+        <option value="unemployed">বেকার (নিজেই জমি-জিরো)</option>
+      </select>
+      <div class="funny-hint">🔍 চাকরি যত "সবুজ" বাজার দর তত "গরম" 😅</div>
+    </div>
+
+    <!-- জমি ও বাসস্থান -->
+    <div class="input-group">
+      <label>🏡 জমি ও বাসস্থান (পাত্রের নিজস্ব সম্পদ)</label>
+      <div class="radio-group" id="landGroup">
+        <label><input type="radio" name="land" value="none" checked> নেই (ভাড়া বাসায় থাকে)</label>
+        <label><input type="radio" name="land" value="small"> ১-৩ বিঘা জমি আছে</label>
+        <label><input type="radio" name="land" value="big"> ৪+ বিঘা / প্লটের মালিক</label>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>🏠 নিজের বাসা / ফ্ল্যাট?</label>
+      <div class="radio-group" id="houseGroup">
+        <label><input type="radio" name="house" value="none" checked> নেই (ভাড়া মেসে থাকে)</label>
+        <label><input type="radio" name="house" value="flat"> ছোট ফ্ল্যাট / অ্যাপার্টমেন্ট</label>
+        <label><input type="radio" name="house" value="building"> বিলাসবহুল বাসা / একাধিক ফ্ল্যাট</label>
+      </div>
+    </div>
+
+    <!-- পারিবারিক তথ্য -->
+    <div class="input-group">
+      <label>👨‍👩‍👧 বাবা-মা কি বিয়ের পর থাকবেন একসাথে?</label>
+      <div class="radio-group" id="parentsGroup">
+        <label><input type="radio" name="parents" value="separate" checked> না (আলাদা থাকবেন — প্লাস পয়েন্ট)</label>
+        <label><input type="radio" name="parents" value="together"> হ্যাঁ (সঙ্গে থাকবেন — মাইনাস পয়েন্ট 😛)</label>
+      </div>
+      <div class="funny-hint">🎭 আলাদা মানে শ্বশুরবাড়ির tense কম — বাজারে দাম বেশি!</div>
+    </div>
+
+    <!-- প্রেম ও অভ্যাস -->
+    <div class="input-group">
+      <label>💔 বিয়ের আগে কয়টা প্রেম করেছে?</label>
+      <select id="exCount">
+        <option value="0">০ — "আমি শুধু তোমার জন্য অপেক্ষা করেছি" 🥺</option>
+        <option value="1">১ টা — এক্সপেরিমেন্টেড 😬</option>
+        <option value="2">২ টা — রোমিও সিন্ড্রোম 🎭</option>
+        <option value="3">৩+ টা — এক্সপার্ট লাভার 😂</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>🚬 কোন খারাপ অভ্যাস আছে?</label>
+      <div class="radio-group" id="habitGroup">
+        <label><input type="radio" name="habit" value="none" checked> নেই — ফেরেশতা পাত্র 😇</label>
+        <label><input type="radio" name="habit" value="smoke"> ধূমপান/গাঁজা (ফুফ) 🤢</label>
+        <label><input type="radio" name="habit" value="gambling"> জুয়া / অতিরিক্ত আড্ডা 🃏</label>
+      </div>
+    </div>
+
+    <button id="evaluateBtn">🎲 পাত্রের বাজার দর জানুন 🎲</button>
+  </div>
+
+  <div id="resultCard" class="result-area" style="display: none;">
+    <div class="result-title">📢 পাত্রের আনুমানিক "বাজার মূল্য"</div>
+    <div class="price-tag" id="marketPrice">০ টাকা</div>
+    <div class="comment-box" id="funnyComment">আপনার মূল্যায়ন ফলাফল আসছে...</div>
+    <div class="legal-roar" id="legalMsg">
+      ⚠️ যৌতুক একটি জঘন্য অপরাধ। উপরের তথ্য সম্পূর্ণ ব্যঙ্গাত্মক ও সচেতনতামূলক — কাউকে যৌতুক দেবেন না, নেবেন না।
+    </div>
+  </div>
+  <div class="footer-joke">
+    🧠 শিক্ষামূলক + হাস্যরস: মনে রাখবেন, মানুষ পণ্য না, যৌতুক বন্ধ করুন, ভালোবাসার বিয়ে করুন 💙
+  </div>
+</div>
+
+<script>
+  (function() {
+    // মজার মজার কমেন্ট আর পয়েন্ট কনফিগার
+    function evaluateMarketPrice() {
+      let basePrice = 0;
+      let profession = document.getElementById('profession').value;
+      // পেশা বেস
+      if (profession === 'govt') basePrice = 1200000;
+      else if (profession === 'private') basePrice = 800000;
+      else if (profession === 'business') basePrice = 1500000;
+      else if (profession === 'freelancer') basePrice = 600000;
+      else if (profession === 'unemployed') basePrice = 50000;  // বেকারদের শূন্য দর নয়, ব্যঙ্গ করে সামান্য দর যেন হাসি পায়
+
+      // জমি বোনাস
+      let land = document.querySelector('input[name="land"]:checked').value;
+      if (land === 'small') basePrice += 500000;
+      else if (land === 'big') basePrice += 1200000;
+
+      // বাসা বোনাস
+      let house = document.querySelector('input[name="house"]:checked').value;
+      if (house === 'flat') basePrice += 400000;
+      else if (house === 'building') basePrice += 1000000;
+
+      // বাবা-মা : separate থাকলে বোনাস (শ্বশুরবাড়ি স্বাধীনতা ফ্যাক্টর)
+      let parents = document.querySelector('input[name="parents"]:checked').value;
+      if (parents === 'separate') basePrice += 300000;
+      else if (parents === 'together') basePrice -= 150000;   // সঙ্গে থাকলে কিছু টেনশন ডিসকাউন্ট :D
+
+      // প্রেমের সংখ্যা (এক্স কাউন্ট)
+      let exCount = document.getElementById('exCount').value;
+      exCount = parseInt(exCount);
+      if (exCount === 1) basePrice -= 80000;
+      else if (exCount === 2) basePrice -= 200000;
+      else if (exCount >= 3) basePrice -= 350000;
+      // ০ হলে কোনো কাটতি নেই, বরং একটা রোমান্টিক বোনাস
+      if (exCount === 0) basePrice += 50000;   // "আমি কুমার পাত্র" বোনাস
+
+      // খারাপ অভ্যাস
+      let habit = document.querySelector('input[name="habit"]:checked').value;
+      if (habit === 'smoke') basePrice -= 250000;
+      else if (habit === 'gambling') basePrice -= 400000;
+
+      // নেগেটিভ হলে সেটা শূন্য করতে পারি কিন্তু মজা থাকবে কমাও, তবে মাইনাস কমেডি দেখাতে চাইলে রেখেছি
+      // যাতে বেকার + অভ্যাস + প্রেমে মাইনাসে গেলে কমেডি হয় 
+      let finalPrice = Math.max(0, basePrice);  // ঋণাত্বক হলে ০ টাকা, কিন্তু মজা হিসেবে ০ বা ১ টাকা দেখাবে
+      
+      // ব্যঙ্গাত্মক কমেন্ট জেনারেট
+      let funnyMsg = "";
+      if (profession === 'unemployed' && finalPrice < 100000) {
+        funnyMsg = "🃏 বাজারে দর প্রায় শূন্য! কিন্তু সোনার মানুষ খোঁজা উচিত নোটের গাদায় নয় 💔 (হাসতে হাসতে সচেতন হোন)";
+      } else if (finalPrice >= 2500000) {
+        funnyMsg = "🤯 এই পাত্র তো হীরক খনি! জমি-বাসা-ক্যারিয়ার সব আছে। কিন্তু মনে রাখবেন, যৌতুক নেওয়া মানে অপরাধ। সুখের বিয়ে করবেন ❤️";
+      } else if (finalPrice >= 1500000) {
+        funnyMsg = "✨ সোনার পাত্র! তবে শুধু টাকার ভিত্তিতে পাত্র দেখবেন না, মানুষ টা কেমন সেটাও বড় কথা। আর যৌতুক? ফাটাফাটি জেল হবে 😎";
+      } else if (finalPrice >= 700000) {
+        funnyMsg = "😄 মোটামুটি পাত্র। কিছু জমি-জমা আছে, তবে এখনও বাড়ানোর সুযোগ আছে। সতর্কতা: যৌতুক আইনগতভাবে দণ্ডনীয়";
+      } else if (finalPrice < 200000 && profession !== 'unemployed') {
+        funnyMsg = "🧐 বাজার দর কম, কিন্তু ভালো মানুষ খুঁজুন, সম্পদ নয়। যৌতুকের লোভে জীবন নষ্ট করবেন না!";
+      } else {
+        funnyMsg = "📢 পাত্রের 'বাজার দর' হাসির জন্য। বাস্তবে কোনো পাত্র বা পাত্রী যৌতুকের বিনিময় নয়। স্মার্ট বিবাহ বেছে নিন।";
+      }
+
+      // বিশেষ মজা: বেকার+প্রেম বেশি+অভ্যাস থাকলে অতিরিক্ত মজার কমেন্ট
+      let ex = parseInt(document.getElementById('exCount').value);
+      let badHabit = document.querySelector('input[name="habit"]:checked').value;
+      if (profession === 'unemployed' && ex >= 2 && badHabit !== 'none') {
+        funnyMsg = "🤣 বাজারে দর মাইনাসে গেছে! কিন্তু ভয় পাবেন না — যৌতুক নিষিদ্ধ, হিরো বনাম জিরো সবাই সমান। শুধু হাসির জন্য ক্যালকুলেটর!";
+      } else if (ex === 3 && finalPrice < 500000) {
+        funnyMsg = "🎭 প্রেমের সংখ্যা বেশি, বাজার দর কম! তবে এটি শিক্ষা: মানুষের মূল্য টাকায় মাপা যায় না। যৌতুক বন্ধ করুন।";
+      }
+
+      // ফরম্যাট টাকা বাংলা স্টাইলে কমা সহ (বাংলা সংখ্যা)
+      function formatTaka(amount) {
+        if (amount === 0) return "০ টাকা (বিনামূল্যে? না, এটা ব্যঙ্গ 💢)";
+        let num = Math.round(amount);
+        let numStr = num.toString();
+        let lastThree = numStr.slice(-3);
+        let otherDigits = numStr.slice(0, -3);
+        let formatted;
+        if (otherDigits !== "") {
+          formatted = otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + "," + lastThree;
+        } else {
+          formatted = lastThree;
+        }
+        const bengaliDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+        let banglaFormatted = formatted.replace(/\d/g, d => bengaliDigits[parseInt(d)]);
+        return banglaFormatted + " টাকা (হাস্যরস মাত্র)";
+      }
+
+      // রেজাল্ট UI আপডেট
+      document.getElementById('marketPrice').innerHTML = formatTaka(finalPrice);
+      document.getElementById('funnyComment').innerHTML = funnyMsg;
+      
+      // যৌতুক বিরোধী বার্তা কাস্টমাইজ
+      let legalDiv = document.getElementById('legalMsg');
+      legalDiv.innerHTML = `🚨 যৌতুক দণ্ডনীয় অপরাধ (দন্ডবিধি ২২ নং আইন) 🚨<br> এই ক্যালকুলেটর কেবল শিক্ষা ও বিনোদনের জন্য। বাস্তবে পাত্রের মূল্য তার চরিত্র ও ভালোবাসা, সম্পদ নয়। কাউকে যৌতুক দেবেন না, প্রতিবাদ করুন।`;
+      
+      const resultCard = document.getElementById('resultCard');
+      resultCard.style.display = "block";
+      resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ইভেন্ট লিসেনার
+    document.getElementById('evaluateBtn').addEventListener('click', evaluateMarketPrice);
+    
+    // পৃষ্ঠা লোডে ডিফল্ট কিছু ভ্যালু দিয়ে কৌতুক (না দিলেও চলে)
+    window.addEventListener('DOMContentLoaded', () => {
+      // প্রি-পপুলেট কিছু এন্ট্রি মজা করতে পারি কিন্তু না দিলেও হবে। 
+      // শুধু নিশ্চিত করা যে রেডিও গ্রুপে ডিফল্ট 'না' থেকেই ভালো।
+      let landNone = document.querySelector('input[name="land"][value="none"]');
+      if(landNone) landNone.checked = true;
+      let houseNone = document.querySelector('input[name="house"][value="none"]');
+      if(houseNone) houseNone.checked = true;
+      let parentsSeparate = document.querySelector('input[name="parents"][value="separate"]');
+      if(parentsSeparate) parentsSeparate.checked = true;
+      let habitNone = document.querySelector('input[name="habit"][value="none"]');
+      if(habitNone) habitNone.checked = true;
+      
+      // এক্স কাউন্ট কমেডি ডিফল্ট 0
+      let exSelect = document.getElementById('exCount');
+      if(exSelect) exSelect.value = "0";
+    });
+  })();
+</script>
+</body>
+</html>
